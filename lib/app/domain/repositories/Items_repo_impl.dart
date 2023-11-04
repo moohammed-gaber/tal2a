@@ -14,12 +14,6 @@ class ItemsRepoImpl implements ItemsRepo {
   ItemsRepoImpl(this.localDatabaseClient);
 
   Future<Either<Failure, List<Item>>> getAll() async {
-    /*
-    SELECT *
-FROM categories
-JOIN items ON categories.category_id = items.category_id;
-
-     */
     final result = await localDatabaseClient.customSelect("""
         SELECT * FROM items_table INNER JOIN categories_table ON categories_table.category_id = items_table.category_id;
     

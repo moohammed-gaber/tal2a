@@ -1,5 +1,5 @@
 import 'package:cashier/app/application/categories_view_model.dart';
-import 'package:cashier/app/application/orders_view_model.dart';
+import 'package:cashier/app/application/add_orders_view_model.dart';
 import 'package:cashier/app/domain/entities/category.dart';
 import 'package:cashier/app/domain/entities/item.dart';
 import 'package:cashier/app/presentation/extenstions/extenstions.dart';
@@ -21,7 +21,7 @@ class AddOrdersPage extends ConsumerStatefulWidget {
 }
 
 class _CategoriesPageState extends ConsumerState<AddOrdersPage> {
-  final provider = ordersViewModelProvider;
+  final provider = addOrdersViewModelProvider;
   late final viewModel = ref.read(provider.notifier);
   final textEditingController = TextEditingController();
   final formKey = GlobalKey<FormBuilderState>();
@@ -38,7 +38,6 @@ class _CategoriesPageState extends ConsumerState<AddOrdersPage> {
               if (formKey.currentState!.saveAndValidate()) {
                 await viewModel.add(
                     num.parse(formKey.currentState!.value['delivery_price']));
-               return;
                 formKey.currentState!.reset();
                 viewModel.reset();
               }

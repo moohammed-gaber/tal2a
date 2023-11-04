@@ -7,6 +7,8 @@ import 'package:dartz/dartz.dart';
 abstract class OrdersRepo {
   Future<Either<Failure, List<OrderEntity>>> getAll();
   Future<Either<Failure, List<Category>>> search(String searchKey);
-  Future<Either<Failure, OrderEntity>> add(OrderData category, List<OrderItem> items);
+  Future<Either<Failure, OrderEntity>> add(
+      OrderData category, List<OrderItem> items);
   Future<Either<Failure, Unit>> delete(int id);
+  Future<Either<Failure, List<OrderItem>>> getOrderItems(int orderId);
 }

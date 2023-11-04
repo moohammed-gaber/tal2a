@@ -27,6 +27,14 @@ class OrdersRepoImpl implements OrdersRepo {
     return right(result.map((e) => OrderEntity.fromTable(e)).toList());
   }
 
+  Future<Either<Failure, List<OrderItem>>> getOrderItems(int orderId) async {
+    final result = await localDatabaseClient.customSelect("""
+        SELECT * FROM order_items_table INNER JOIN items_table ON order_items_table.order_items_item_id = items_table.item_id INNER JOIN categories_table ON categories_table.category_id = items_table.category_id WHERE order_items_table.order_items_order_id =?;
+    """, variables: [Variable.withInt(orderId)]).get();
+    print(result.map((e) => OrderItem.fromMap(e.data)));
+    return right(result.map((e) => OrderItem.fromMap(e.data)).toList());
+  }
+
   @override
   Future<Either<Failure, OrderEntity>> add(
       OrderData item, List<OrderItem> items) async {
@@ -46,8 +54,9 @@ class OrdersRepoImpl implements OrdersRepo {
   }
 
   Future<Either<Failure, Unit>> delete(int id) async {
-    final statement = localDatabaseClient.delete(localDatabaseClient.itemsTable)
-      ..where((tbl) => tbl.itemId.equals(id));
+    final statement = localDatabaseClient
+        .delete(localDatabaseClient.ordersTable)
+      ..where((tbl) => tbl.orderId.equals(id));
     await statement.go();
     return right(unit);
   }

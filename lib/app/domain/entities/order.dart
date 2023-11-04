@@ -3,6 +3,10 @@ import 'package:cashier/core/data/local/clients/local_database_client.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 
+class OrderDetails {
+
+}
+
 class OrderEntity {
   final int id;
   final OrderData orderData;

@@ -19,6 +19,13 @@ class OrderItem {
       quantity: quantity ?? this.quantity,
     );
   }
+
+  factory OrderItem.fromMap(Map<String, dynamic> map) {
+    return OrderItem(
+      item: Item.fromMap(map),
+      quantity: map['order_items_quantity'] as int,
+    );
+  }
 }
 
 class Item {

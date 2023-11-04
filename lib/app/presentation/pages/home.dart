@@ -1,6 +1,7 @@
 import 'package:cashier/app/presentation/pages/add_orders_page.dart';
 import 'package:cashier/app/presentation/pages/categories_page.dart';
 import 'package:cashier/app/presentation/pages/items_page.dart';
+import 'package:cashier/app/presentation/pages/orders_page.dart';
 import 'package:cashier/core/presentation/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,18 +27,16 @@ class Home extends StatelessWidget {
               size: 150,
             ),
           ),
-/*
           HomeGridCard(
-            title: 'عمل الاوردرات',
+            title: 'الاوردرات',
             onTap: () {
-              context.toPage(AddOrdersPage());
+              context.toPage(OrdersPage());
             },
             icon: Icon(
-              Icons.add_business_rounded,
+              Icons.request_quote_outlined,
               size: 150,
             ),
           ),
-*/
           HomeGridCard(
             onTap: () {
               context.toPage(ItemsPage());

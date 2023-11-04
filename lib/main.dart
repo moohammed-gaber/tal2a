@@ -1,21 +1,43 @@
 import 'package:cashier/app/presentation/pages/home.dart';
+import 'package:cashier/core/data/repositories/security_repo.dart';
 import 'package:cashier/core/presentation/injection/injection.dart';
+import 'package:cashier/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   configureDependencies();
-  runApp(ProviderScope(child: const MyApp()));
+
+  final isActivated = await getIt<SecurityRepo>().isActive();
+  runApp(ProviderScope(child: isActivated ? MyApp() : NotActivated()));
 }
+
+class NotActivated extends StatelessWidget {
+  const NotActivated({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(child: Text('نسخه غير مفعله تواصل معنا 01283894969')),
+      ),
+    );
+  }
+}
+
 final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(navigatorKey:navigatorKey ,
+    return MaterialApp(
+      navigatorKey: navigatorKey,
       locale: Locale('ar'),
       theme: ThemeData(
           inputDecorationTheme: InputDecorationTheme(
