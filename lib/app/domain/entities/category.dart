@@ -12,9 +12,16 @@ class Category {
   });
 
   factory Category.fromTable(CategoriesTableData data) => Category(
-        id: data.id,
+        id: data.categoryId,
         data: CategoryData.fromTable(data),
       );
+
+  factory Category.fromMap(Map<String, dynamic> map) {
+    return Category(
+      id: map['category_id'] as int,
+      data: CategoryData.fromMap(map),
+    );
+  }
 }
 
 class CategoryData {
@@ -25,12 +32,12 @@ class CategoryData {
   });
 
   factory CategoryData.fromTable(CategoriesTableData data) => CategoryData(
-        title: data.title,
+        title: data.categoryTitle,
       );
 
   Insertable<CategoriesTableData> toTable() {
     return CategoriesTableCompanion.insert(
-      title: title,
+      categoryTitle: title,
     );
   }
 
@@ -38,4 +45,10 @@ class CategoryData {
       CategoryData(
         title: data['title'],
       );
+
+  factory CategoryData.fromMap(Map<String, dynamic> map) {
+    return CategoryData(
+      title: map['category_title'] as String,
+    );
+  }
 }

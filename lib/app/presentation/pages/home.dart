@@ -1,3 +1,4 @@
+import 'package:cashier/app/presentation/pages/add_orders_page.dart';
 import 'package:cashier/app/presentation/pages/categories_page.dart';
 import 'package:cashier/app/presentation/pages/items_page.dart';
 import 'package:cashier/core/presentation/extension.dart';
@@ -16,13 +17,27 @@ class Home extends StatelessWidget {
             crossAxisCount: 2, mainAxisExtent: 200),
         children: [
           HomeGridCard(
-            title: 'الاوردرات',
-            onTap: () {},
+            title: 'عمل الاوردرات',
+            onTap: () {
+              context.toPage(AddOrdersPage());
+            },
             icon: Icon(
               Icons.add_business_rounded,
               size: 150,
             ),
           ),
+/*
+          HomeGridCard(
+            title: 'عمل الاوردرات',
+            onTap: () {
+              context.toPage(AddOrdersPage());
+            },
+            icon: Icon(
+              Icons.add_business_rounded,
+              size: 150,
+            ),
+          ),
+*/
           HomeGridCard(
             onTap: () {
               context.toPage(ItemsPage());

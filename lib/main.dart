@@ -8,14 +8,14 @@ void main() {
   configureDependencies();
   runApp(ProviderScope(child: const MyApp()));
 }
-
+final navigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp(navigatorKey:navigatorKey ,
       locale: Locale('ar'),
       theme: ThemeData(
           inputDecorationTheme: InputDecorationTheme(
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             labelStyle: TextStyle(color: Colors.orange),
           ),
           colorScheme: ColorScheme.light(
-              primary: Colors.orange,
+            primary: Colors.orange,
 
 /*
             onSecondary: Colors.white,
@@ -31,9 +31,8 @@ class MyApp extends StatelessWidget {
             onPrimary: Colors.white,secondary: Colors.white,
             brightness: Brightness.dark,
 */
-              //
-              // onSurface: Colors.white
-
+            //
+            // onSurface: Colors.white
           ),
           useMaterial3: true,
           primaryColor: Colors.orange,
@@ -41,6 +40,8 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: Colors.orange),
           appBarTheme: AppBarTheme(backgroundColor: Colors.orange)),
       title: 'Flutter Demo',
+      builder: (context, child) =>
+          Directionality(textDirection: TextDirection.rtl, child: child!),
       home: Home(),
     );
   }

@@ -1,0 +1,7 @@
+create table items_table (
+            item_id     integer primary key autoincrement NOT NULL ,
+            item_title     TEXT NOT NULL,
+            item_price     REAL NOT NULL,
+            category_id     integer NOT NULL
+            );
+

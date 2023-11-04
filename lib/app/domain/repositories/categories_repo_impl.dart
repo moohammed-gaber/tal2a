@@ -17,7 +17,8 @@ class CategoriesRepoImpl implements CategoriesRepo {
     final result = await (localDatabaseClient
             .select(localDatabaseClient.categoriesTable)
           ..orderBy([
-            (tbl) => OrderingTerm(expression: tbl.id, mode: OrderingMode.asc)
+            (tbl) =>
+                OrderingTerm(expression: tbl.categoryId, mode: OrderingMode.asc)
           ]))
         .get();
 
@@ -39,8 +40,18 @@ class CategoriesRepoImpl implements CategoriesRepo {
   Future<Either<Failure, Unit>> delete(int id) async {
     final statement = localDatabaseClient
         .delete(localDatabaseClient.categoriesTable)
-      ..where((tbl) => tbl.id.equals(id));
+      ..where((tbl) => tbl.categoryId.equals(id));
     await statement.go();
     return right(unit);
+  }
+
+  @override
+  Future<Either<Failure, List<Category>>> search(String searchKey) async {
+    final query = localDatabaseClient
+        .select(localDatabaseClient.categoriesTable)
+      ..where((tbl) => localDatabaseClient.categoriesTable.categoryTitle
+          .like('%$searchKey%'));
+    final result = await query.get();
+    return right(result.map((e) => Category.fromTable(e)).toList());
   }
 }

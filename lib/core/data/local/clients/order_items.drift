@@ -1,0 +1,8 @@
+create table order_items_table (
+            order_items_id     integer primary key autoincrement NOT NULL ,
+            order_items_item_id     integer NOT NULL,
+            order_items_quantity     integer NOT NULL,
+
+            order_items_order_id     integer NOT NULL
+            );
+

@@ -24,11 +24,13 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
   Widget build(BuildContext context) {
     final state = ref.watch(provider);
     // viewModel.repo.getAll().then((value) => print(value));
+/*
     viewModel.add(ItemData(
         title: 'Test',
         category: Category(id: 3, data: CategoryData(title: 'حادق'))));
+*/
     return Scaffold(
-        appBar: AppBar(title: Text('الاقسام')),
+        appBar: AppBar(title: Text('الاصناف')),
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () {
@@ -44,6 +46,7 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
                     final item = data[index];
                     return CustomListTile(
                         onTap: () {},
+                        subtitle: Text(item.data.category.data.title),
                         onTabDelete: () => viewModel.delete(index),
                         leading: (item.id.toString()),
                         title: (item.data.title));

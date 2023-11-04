@@ -1,0 +1,6 @@
+create table orders_table (
+            order_id     integer primary key autoincrement ,
+            order_price     REAL NOT NULL,
+            order_delivery     REAL NOT NULL
+            );
+

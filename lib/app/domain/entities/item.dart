@@ -3,6 +3,24 @@ import 'package:cashier/core/data/local/clients/local_database_client.dart';
 import 'package:drift/src/runtime/data_class.dart';
 import 'package:flutter/material.dart';
 
+class OrderItem {
+  final Item item;
+  final int quantity;
+  num get totalPrice => item.data.price * quantity;
+
+  OrderItem({required this.item, required this.quantity});
+
+  OrderItem copyWith({
+    Item? item,
+    int? quantity,
+  }) {
+    return OrderItem(
+      item: item ?? this.item,
+      quantity: quantity ?? this.quantity,
+    );
+  }
+}
+
 class Item {
   final int id;
   final ItemData data;
@@ -11,33 +29,50 @@ class Item {
     required this.id,
     required this.data,
   });
-
-  factory Item.fromTable(ItemsTableData data,) => Item(
-        id: data.id,
-        data: ItemData.fromTable(data,),
+  factory Item.fromTable(ItemsTableData data, Category category) => Item(
+        id: data.itemId,
+        data: ItemData.fromTable(data, category),
       );
+  factory Item.fromMap(Map<String, dynamic> map) {
+    return Item(
+      id: map['item_id'] as int,
+      data: ItemData.fromMap(map),
+    );
+  }
 }
 
 class ItemData {
   final String title;
   final Category category;
+  final num price;
 
   const ItemData({
     required this.title,
+    required this.price,
     required this.category,
   });
-
-  factory ItemData.fromTable(ItemsTableData data,) =>
-      ItemData(title: data.title, category: Category(id: 1, data: CategoryData(title: 'title')));
+  factory ItemData.fromTable(ItemsTableData data, Category category) =>
+      ItemData(
+          price: data.itemPrice, title: data.itemTitle, category: category);
 
   Insertable<ItemsTableData> toTable() {
-    //
     return ItemsTableCompanion.insert(
-      title: title,
+      itemTitle: title,
+      itemPrice: price.toDouble(),
       categoryId: category.id,
     );
   }
 
-  factory ItemData.fromForm({required Map<String, dynamic> data}) =>
-      ItemData(title: data['title'], category: data['category_id']);
+  factory ItemData.fromForm({required Map<String, dynamic> data}) => ItemData(
+      price: data['price'],
+      title: data['title'],
+      category: data['category_id']);
+
+  factory ItemData.fromMap(Map<String, dynamic> map) {
+    return ItemData(
+      price: (map['item_price'] as double),
+      title: map['item_title'] as String,
+      category: Category.fromMap(map),
+    );
+  }
 }

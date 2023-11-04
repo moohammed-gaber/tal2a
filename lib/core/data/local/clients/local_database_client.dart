@@ -9,13 +9,19 @@ part 'local_database_client.g.dart';
 
 @LazySingleton()
 @DriftDatabase(
-  tables: [CategoriesTable, ItemsTable, OrdersTable, OrderItemsTable],
+  include: {
+    'categories.drift',
+    'items.drift',
+    'orders.drift',
+    'order_items.drift',
+  },
+  tables: [],
 )
 class LocalDatabaseClient extends _$LocalDatabaseClient {
   LocalDatabaseClient() : super(impl.connect());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 4;
   Future<void> createTables(Migrator migrator) async {
     await migrator.createTable(categoriesTable);
     await migrator.createTable(itemsTable);

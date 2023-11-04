@@ -5,16 +5,19 @@ class CustomListTile extends StatelessWidget {
       {Key? key,
       required this.leading,
       required this.title,
+       this.subtitle,
       required this.onTap,
       required this.onTabDelete})
       : super(key: key);
   final String leading, title;
   final VoidCallback onTabDelete;
   final VoidCallback? onTap;
+  final Widget  ? subtitle;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      subtitle: subtitle,
         onTap: onTap,
         trailing: IconButton(
             onPressed: onTabDelete,

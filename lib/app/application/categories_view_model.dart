@@ -79,4 +79,5 @@ class CategoriesViewModel
       [...state.categories..removeAt(index)],
     ));
   }
+
 }
