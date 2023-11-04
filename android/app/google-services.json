@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "596827048691",
+    "project_id": "cachier-man-app",
+    "storage_bucket": "cachier-man-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596827048691:android:bbda9f484de4a7bf8b0586",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR0BwMcJp4Nn0VGJRZkuDR50kj4xAwuEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596827048691:android:0d1ada674656fa628b0586",
+        "android_client_info": {
+          "package_name": "com.tal2a.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR0BwMcJp4Nn0VGJRZkuDR50kj4xAwuEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
