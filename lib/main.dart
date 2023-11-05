@@ -2,17 +2,17 @@ import 'package:cashier/app/presentation/pages/home.dart';
 import 'package:cashier/core/data/repositories/security_repo.dart';
 import 'package:cashier/core/presentation/injection/injection.dart';
 import 'package:cashier/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   configureDependencies();
 
-  final isActivated = await getIt<SecurityRepo>().isActive();
-  runApp(ProviderScope(child: isActivated ? MyApp() : NotActivated()));
+  // final isActivated = await getIt<SecurityRepo>().isActive();
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class NotActivated extends StatelessWidget {
